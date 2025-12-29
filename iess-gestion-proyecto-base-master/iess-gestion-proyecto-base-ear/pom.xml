@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>iess-gestion-proyecto-base</artifactId>
+		<groupId>ec.gob.iess</groupId>
+		<version>3.0.5</version>
+	</parent>
+
+	<groupId>ec.gob.iess</groupId>
+	<artifactId>iess-gestion-proyecto-base-ear</artifactId>
+	<version>3.0.5</version>
+	<packaging>ear</packaging>
+
+	<name>iess-gestion-proyecto-base-ear</name>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.6.1</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-ear-plugin</artifactId>
+				<version>2.8</version>
+				<configuration>
+					<version>6</version>
+					<defaultLibBundleDir>lib</defaultLibBundleDir>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<dependencies>
+			<dependency>
+			<groupId>ec.gob.iess</groupId>
+			<artifactId>iess-componente-transversal-ejb</artifactId>
+			<version>${transversal-ejb.version}</version>
+			<type>ejb</type>
+		</dependency>
+	
+		<dependency>
+			<groupId>ec.gob.iess</groupId>
+			<artifactId>iess-gestion-proyecto-base-ejb</artifactId>
+			<version>${modulo.version}</version>
+			<type>ejb</type>
+		</dependency>
+		<dependency>
+			<groupId>ec.gob.iess</groupId>
+			<artifactId>iess-gestion-proyecto-base-web</artifactId>
+			<version>${modulo.version}</version>
+			<type>war</type>
+		</dependency>
+		<dependency>
+			<groupId>iess</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.10</version>
+		</dependency>
+	</dependencies>
+
+	<distributionManagement>
+		<repository>
+			<id>internal</id>
+			<url>http://192.168.29.6:8080/repository/internal/</url>
+		</repository>
+	</distributionManagement>
+
+	<repositories>
+		<repository>
+			<id>internal</id>
+			<name>Archiva Managed Internal Repository</name>
+			<url>http://192.168.29.6:8080/repository/internal/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+</project>

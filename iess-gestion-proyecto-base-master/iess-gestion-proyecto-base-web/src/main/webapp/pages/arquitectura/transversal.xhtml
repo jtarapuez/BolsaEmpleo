@@ -1,0 +1,177 @@
+<ui:composition template="/plantilla/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+	<ui:define name="breadcrumb">
+		<li>Componentes</li>
+		<li>/</li>
+		<li>Transversal</li>
+	</ui:define>
+	<ui:define name="content">
+		<h:form id="formConsulta">
+		<p:messages closable="true" />
+			<div class="ui-g ui-fluid">
+				<div class="ui-g-12 ui-lg-6">
+					<!-- Left Side -->
+					<div class="card card-w-title">
+						<h1>Items Catálogo</h1>
+						<p:selectOneMenu id="catalogoDetalleItems"
+								value="#{transversalControlador.transversalBean.detallesCatalogoSeleccionado}"
+								style="margin-bottom:10px;">
+								<f:selectItem itemLabel="Seleccionar" itemValue="" />
+								<f:selectItems
+									value="#{transversalControlador.transversalBean.detallesCatalogo}" />
+						</p:selectOneMenu>
+					</div>
+					<div class="card card-w-title">
+						<h1>Catálogo</h1>
+						<p:dataTable var="catalogoDetalle"
+							value="#{transversalControlador.transversalBean.listaCatalogoDetalle}"
+							selectionMode="single" reflow="true"
+							selection="#{transversalControlador.transversalBean.catalogoDetalleSeleccionado}"
+							rowKey="#{catalogoDetalle.codigoCatalogo}" paginator="true"
+							rows="10">
+							<p:column headerText="Código Catálogo"
+								sortBy="#{catalogoDetalle.codigoCatalogo}">
+								<h:outputText value="#{catalogoDetalle.codigoCatalogo}" />
+							</p:column>
+
+							<p:column headerText="Código Detalle"
+								sortBy="#{catalogoDetalle.codigoDetalle}">
+								<h:outputText value="#{catalogoDetalle.codigoDetalle}" />
+							</p:column>
+
+							<p:column headerText="Valor" sortBy="#{catalogoDetalle.valor}">
+								<h:outputText value="#{catalogoDetalle.valor}" />
+							</p:column>
+
+							<p:column headerText="Observación"
+								sortBy="#{catalogoDetalle.observacion}">
+								<h:outputText value="#{catalogoDetalle.observacion}" />
+							</p:column>
+						</p:dataTable>
+
+					</div>
+				</div>
+				<div class="ui-g-12 ui-lg-6">
+					<!-- Left Side -->
+					<div class="card card-w-title">
+						<h1>División Política</h1>
+						<p:panelGrid columns="1" style="margin-bottom:10px" layout="grid"
+							styleClass="form-group ui-panelgrid-blank">
+							<p:selectOneMenu id="provincia"
+								value="#{transversalControlador.transversalBean.provinciaSeleccionada}"
+								style="margin-bottom:10px;">
+								<f:selectItem itemLabel="Seleccionar Provincia" itemValue="" />
+								<f:selectItems
+									value="#{transversalControlador.transversalBean.provincias}" />
+								<p:ajax update="canton" event="change"
+									listener="#{transversalControlador.obtenerCantonDemo()}" />
+							</p:selectOneMenu>
+							<p:selectOneMenu id="canton"
+								value="#{transversalControlador.transversalBean.cantonSeleccionado}"
+								style="margin-bottom:10px;">
+								<f:selectItem itemLabel="Seleccionar Cantón" itemValue="" />
+								<f:selectItems
+									value="#{transversalControlador.transversalBean.cantones}" />
+								<p:ajax update="parroquia" event="change"
+									listener="#{transversalControlador.obtenerParroquiaDemo()}" />
+							</p:selectOneMenu>
+							<p:selectOneMenu id="parroquia"
+								value="#{transversalControlador.transversalBean.parroquiaSeleccionada}"
+								style="margin-bottom:10px;">
+								<f:selectItem itemLabel="Seleccionar Parroquia" itemValue="" />
+								<f:selectItems
+									value="#{transversalControlador.transversalBean.parroquias}" />
+							</p:selectOneMenu>
+						</p:panelGrid>
+					</div>
+					<!-- Left Side -->
+					<div class="card card-w-title">
+						<h1>Política Corporativa</h1>
+						<p:accordionPanel style="margin-top:20px">
+							<p:tab title="TEXTO">
+									<p:panelGrid columns="1"
+										columnClasses="ui-grid-col-8"
+										layout="grid" styleClass="ui-panelgrid-blank form-group"
+										style="border:0px none; background-color:transparent;">
+										<h:panelGroup styleClass="md-inputfield">
+											<p:inputText id="codigo" value="#{transversalControlador.transversalBean.politicaCadena.codigo}" />
+											<label>Código</label>
+										</h:panelGroup>
+										<h:panelGroup styleClass="md-inputfield">
+											<p:inputText id="descripcion" value="#{transversalControlador.transversalBean.politicaCadena.descripcion}" />
+											<label>Descripción</label>
+										</h:panelGroup>
+										<h:panelGroup styleClass="md-inputfield">
+											<p:inputText id="valor" value="#{transversalControlador.transversalBean.politicaCadena.valor}" />
+											<label>Valor</label>
+										</h:panelGroup>
+										<h:panelGroup styleClass="md-inputfield">
+											<p:inputText id="observacion" value="#{ctransversalControlador.transversalBean.politicaCadena.observacion}" />
+											<label>Observación</label>
+										</h:panelGroup>
+									</p:panelGrid>
+							</p:tab>
+							<p:tab title="NUMÉRICO">
+								<p:panelGrid columns="1"
+										columnClasses="ui-grid-col-8"
+										layout="grid" styleClass="ui-panelgrid-blank form-group"
+										style="border:0px none; background-color:transparent;">
+										<h:panelGroup styleClass="md-inputfield">
+											<p:inputText id="num-codigo" value="#{transversalControlador.transversalBean.politicaNumerico.codigo}" />
+											<label>Código</label>
+										</h:panelGroup>
+										<h:panelGroup styleClass="md-inputfield">
+											<p:inputText id="num-descripcion" value="#{transversalControlador.transversalBean.politicaNumerico.descripcion}" />
+											<label>Descripción</label>
+										</h:panelGroup>
+										<h:panelGroup styleClass="md-inputfield">
+											<p:inputText id="num-valor" value="#{ctransversalControlador.transversalBean.politicaNumerico.valor}" />
+											<label>Valor</label>
+										</h:panelGroup>
+										<h:panelGroup styleClass="md-inputfield">
+											<p:inputText id="num-unidad" value="#{transversalControlador.transversalBean.politicaNumerico.unidad}" />
+											<label>Unidad</label>
+										</h:panelGroup>
+										<h:panelGroup styleClass="md-inputfield">
+											<p:inputText id="num-observacion" value="#{transversalControlador.transversalBean.politicaNumerico.observacion}" />
+											<label>Observación</label>
+										</h:panelGroup>
+									</p:panelGrid>
+
+							</p:tab>
+							<p:tab title="FECHA">
+								<p:panelGrid columns="1"
+										columnClasses="ui-grid-col-8"
+										layout="grid" styleClass="ui-panelgrid-blank form-group"
+										style="border:0px none; background-color:transparent;">
+										<h:panelGroup styleClass="md-inputfield">
+											<p:inputText id="fec-codigo" value="#{transversalControlador.transversalBean.politicaFecha.codigo}" />
+											<label>Código</label>
+										</h:panelGroup>
+										<h:panelGroup styleClass="md-inputfield">
+											<p:inputText id="fec-descripcion" value="#{transversalControlador.transversalBean.politicaFecha.descripcion}" />
+											<label>Descripción</label>
+										</h:panelGroup>
+										<h:panelGroup styleClass="md-inputfield">
+											<p:inputText id="fec-valor" value="#{transversalControlador.transversalBean.politicaFecha.fecha}" />
+											<label>Valor</label>
+										</h:panelGroup>
+										<h:panelGroup styleClass="md-inputfield">
+											<p:inputText id="fec-observacion" value="#{transversalControlador.transversalBean.politicaFecha.observacion}" />
+											<label>Observación</label>
+										</h:panelGroup>
+									</p:panelGrid>
+							</p:tab>
+						</p:accordionPanel>
+
+					</div>
+				</div>
+
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,163 @@
+=====  V_2.1.0 =======
+
+OTT-2069
+Solucionar a nivel de aplicación de la plantilla base el error en la funcionalidad presentado en el cierre de sesión
+
+WEB
+(M) principal.xhtml
+
+
+=====  V_2.1.1 =======
+
+OTT-2069
+Solucionar a nivel de aplicación de la plantilla base el error en la funcionalidad presentado en el cierre de sesión
+
+WEB
+(M) principal.xhtml
+
+=====  V_2.2.0 =======
+Ticket#2023081771001116 
+Pruebas - Despliegue problemas acceso aplicativo gestion-afiliados-micros
+
+(M) pom.xml
+
+
+=====  V_2.3.0 =======
+Ticket 2023082671000234
+Actualización Estándar PAS-EST-004
+
+(M) iess-gestion-proyecto-base-ejb/pom.xml
+(M) iess-gestion-proyecto-base-ejb/src/conf/checkstyle.xml
+(M) iess-gestion-proyecto-base-web/pom.xml
+(M) iess-gestion-proyecto-base-web/src/conf/checkstyle.xml
+
+
+=====  V_2.4.0 =======
+Ticket#2024022071002038
+Revisión del Proyecto base de aplicaciones empresariales Proyecto_Base_EAR
+
+ACTUALIZACION VERSIONES LIBRERIAS 
+(M) iess-alfresco (1.1.0)
+(M) transversal-ejb (1.5.2)
+(M) cliente-restful (1.6.0)
+(M) ws-modelo (1.7.0)
+
+=====  V_2.5.0 =======
+Ticket#2024012671003519
+Implementación WEB SERVICE ALFRESCO
+
+CREACIÓN DE PAQUETE EN PROYECTO WEB servicio-alfresco-connector-web
+(N)ec.gob.iess.proyecto.base.alfresco.bean
+(N)ec.gob.iess.proyecto.base.alfresco.controlador
+(N)ec.gob.iess.proyecto.base.alfresco.dto
+(N)ec.gob.proyecto.base.alfresco.enumeracion
+
+CREACIÓN DE CLASES EN PROYECTO WEB servicio-alfresco-connector-web
+(N)GestorDocumentalBean
+(N)AlfrescogGestorControlador
+(N)AlfrescoDto
+(N)AlfrescoEnum
+
+CREACIÓN DE PÁGINAS WEB
+(N)alfrescoDownloadMultipleFile.xhtml
+(N)alfrescoDownloadSingleFile.xhtml
+(N)alfrescoUploadMultiple.xhtml
+(N)alfrescoUploadSingle.xhtml
+
+ACTUALIZACION VERSIONES LIBRERIAS 
+(M) iess-alfresco (1.1.0)
+(M) transversal-ejb (1.5.2)
+(M) cliente-restful (1.8.0)
+(M) ws-modelo (1.8.0)
+
+=====  V_2.5.1 =======
+Ticket#2024112571001138
+
+Revisión del Proyecto base de aplicaciones empresariales Proyecto_Base_EAR
+
+ACTUALIZACION VERSIONES LIBRERIAS 
+(M) transversal-ejb (1.5.3)
+(M) cliente-restful (1.9.0)
+
+=====  V_2.5.2 =======
+Ticket#2024100871004062
+
+requerimiento funcional para desarrollo de aplicativo 
+
+ACTUALIZACION VERSIONES LIBRERIAS 
+(M) transversal-ejb (1.6.0)
+
+=====  V_2.5.3 =======
+Ticket#2025011571002548
+
+Implementación del código OTP
+
+ACTUALIZACION VERSIONES LIBRERIAS 
+(M) pom.xml (V_2.5.3)
+
+GENERACIÓN DE CLASES
+(N) CodigoOTPControlador
+
+CREACIÓN DE PÁGINA JSF
+(N) codigoOTP.xhtml
+
+
+
+=====  V_.3.0.0 =======
+Ticket#2023092771000212
+
+Implementación de cifrado
+
+ACTUALIZACION VERSIONES LIBRERIAS 
+ (M)pom.xml
+ (M)pom.xml
+ (M)pom.xml
+
+GENERACIÓN DE CLASES
+
+(N)CifradoControlador.java  
+
+CREACIÓN DE PÁGINA JSF
+ (N)cifrado.xhtml
+ 
+ =====  V_.3.0.1 =======
+ 
+ Ticket#2025041471002704 - Nuevas modificaciones Jubilación (iess-componente-restful)
+  
+ ACTUALIZACION VERSIONES LIBRERIAS 
+ (M)pom.xml
+ (M)pom.xml
+ (M)pom.xml
+ 
+ 
+ === Vr. 3.0.2 ===
+Ticket#2024121271004051
+Requerimiento Funcional - Proceso de Recoleccion Consentimiento Informado IESS
+Multinegocio paso a produccion 14/07/2025
+
+ACTUALIZACION VERSIONES LIBRERIAS 
+ (M)pom.xml
+
+=== Vr. 3.0.3 ===
+Ticket#2024082071000351
+Requerimiento politica de Actualizacion de datos asegurado y migracion de opcion Actualizacion de datos mediante otp 
+
+ACTUALIZACION VERSIONES LIBRERIAS 
+ (M)pom.xml
+ (M)iess-componente-transversal-ejb versión 1.10.0
+
+ === Vr. 3.0.4 ===
+Ticket#2025082671004021
+Implementación de componente ALTCHA antispam protector (Modificaciones en las versiones de los POM.xml) 
+
+iess-gestion-proyecto-base-ear (pom.xml) M
+iess-gestion-proyecto-base-ejb (pom.xml) M
+iess-gestion-proyecto-base-web (pom.xml) M
+
+ === Vr. 3.0.5 ===
+Ticket#2025062371004067
+Enviar notificaciones automáticas mediante correo electrónico cada vez que un servidor ejecute transacciones (Modificaciones en las versiones de los POM.xml) 
+
+iess-gestion-proyecto-base-ear (pom.xml) M
+iess-gestion-proyecto-base-ejb (pom.xml) M
+iess-gestion-proyecto-base-web (pom.xml) M

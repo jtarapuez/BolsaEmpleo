@@ -1,0 +1,266 @@
+<ui:composition template="/plantilla/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+	<ui:define name="breadcrumb">
+		<li>Componentes</li>
+		<li>/</li>
+		<li>Cifrado</li>
+	</ui:define>
+	<h:head>
+		<style>
+.ui-selectonemenu {
+	width: 50% !important;
+}
+
+.ui-selectonemenu-label {
+	width: 50% !important;
+}
+</style>
+	</h:head>
+	<ui:define name="content">
+		<p:growl id="msgCifrado" showDetail="true" />
+		<h:form id="frmCifrado" onsubmit="return false;">
+			<div class="ui-g ui-fluid">
+				<div class="ui-g-12 ui-lg-6">
+					<!-- Left Side -->
+					<div class="card card-w-title">
+						<div align="center">
+							<h1>Cifrado / Descifrado Cadenas</h1>
+						</div>
+						<br />
+						<p:outputPanel id="pnlGridLlave">
+							<p:panelGrid columns="1" styleClass="ui-noborder"
+								style="margin-left: auto;margin-right: auto"
+								rendered="#{cifradoControlador.mostrarLlave}">
+								<h1>Ingreso de llave</h1>
+								<p:panelGrid columns="2">
+									<p:outputLabel value="Llave de Encriptación" />
+									<p:selectOneMenu id="slctLlave"
+										value="#{cifradoControlador.codigoServicio}"
+										style="font-size: 20% !important;margin-bottom:1px;width: 100% !important"
+										required="true"
+										requiredMessage="Llave de encriptación requerida!">
+										<f:selectItem itemLabel="Seleccionar" itemValue="" />
+										<f:selectItems
+											value="#{cifradoControlador.listaLlavePorServicio}"
+											var="llave" itemLabel="#{llave.nombreServicio}"
+											itemValue="#{llave.codigoServicio}" />
+										<p:ajax event="change" process="@this"
+											listener="#{cifradoControlador.cargarLlaveEncriptacion()}"
+											update="msgCifrado pnlGridLlave pnlGridCifrado" />
+									</p:selectOneMenu>
+								</p:panelGrid>
+							</p:panelGrid>
+						</p:outputPanel>
+
+						<p:outputPanel id="pnlGridCifrado">
+							<p:panelGrid columns="1"
+								rendered="#{cifradoControlador.mostrarCifrado}"
+								styleClass="ui-noborder"
+								style="margin-left: auto;margin-right: auto">
+								<h1>Cifrar AES 256 - Texto</h1>
+								<p:panelGrid columns="2">
+									<p:outputLabel value="Texto para cifrado" />
+									<p:inputText value="#{cifradoControlador.cadenaCifrado}" />
+								</p:panelGrid>
+								<p:panelGrid columns="2">
+									<p:commandButton id="btnCifrado"
+										style="margin-left: auto;margin-right: auto"
+										value="Cifrar Aes2056"
+										action="#{cifradoControlador.cifradoCadenaAes256()}"
+										ajax="true" update="msgCifrado pnlGridCifrado" />
+
+									<p:outputLabel id="outResultadoCifrado"
+										value="#{cifradoControlador.resultadoCifrado}" />
+								</p:panelGrid>
+							</p:panelGrid>
+
+							<p:panelGrid columns="1"
+								rendered="#{cifradoControlador.mostrarDescifrado}"
+								styleClass="ui-noborder"
+								style="margin-left: auto;margin-right: auto">
+
+								<h1>Descifrar AES 256 - Texto</h1>
+
+								<p:panelGrid columns="2">
+									<p:outputLabel value="Texto para descifrado" />
+									<p:inputText value="#{cifradoControlador.cadenaDescifrado}" />
+								</p:panelGrid>
+								<p:panelGrid columns="2">
+									<p:commandButton id="btnDescifrado"
+										style="margin-left: auto;margin-right: auto"
+										value="Descifrar Aes2056"
+										action="#{cifradoControlador.descifradoCadenaAes256()}"
+										ajax="true" update="msgCifrado pnlGridCifrado" />
+
+									<p:outputLabel
+										value="#{cifradoControlador.resultadoDescifrado}" />
+								</p:panelGrid>
+							</p:panelGrid>
+							<br />
+							<p:commandButton id="btnConexionNativa"
+								rendered="#{cifradoControlador.mostrarBotonConexionNativa}"
+								style="margin-left: auto;margin-right: auto"
+								value="Generar Conexion"
+								action="#{cifradoControlador.validarConexionNativa()}"
+								ajax="true" update="pnlGridCifrado pnlGridConexionNativa" />
+						</p:outputPanel>
+
+						<p:outputPanel id="pnlGridConexionNativa">
+							<p:panelGrid columns="1"
+								rendered="#{cifradoControlador.mostrarConexionNativa}">
+								<h1>Registrar Conexion Nativa</h1>
+								<p:panelGrid columns="2">
+									<p:outputLabel value="Módulo" />
+									<p:selectOneMenu id="slctModulo"
+										value="#{cifradoControlador.moduloId}"
+										style="margin-bottom:10px;" required="false">
+										<f:selectItem itemLabel="Seleccionar" itemValue="" />
+										<f:selectItems value="#{cifradoControlador.listaModulo}"
+											var="modulo" itemLabel="#{modulo.descripcion}"
+											itemValue="#{modulo.id}" />
+									</p:selectOneMenu>
+									<p:outputLabel value="Equipo" />
+									<p:selectOneMenu id="slctEquipo"
+										value="#{cifradoControlador.equipoDesarrollo}"
+										style="margin-bottom:10px;">
+										<f:selectItem itemLabel="Seleccionar" itemValue="" />
+										<f:selectItems
+											value="#{cifradoControlador.listaEquipoDesarrollo}"
+											var="equipo" itemLabel="#{equipo.valor}"
+											itemValue="#{equipo.valor}" />
+									</p:selectOneMenu>
+									<p:outputLabel value="Código Aplicación" />
+									<p:inputText value="#{cifradoControlador.codigoAplicacion}" />
+								</p:panelGrid>
+								<p:panelGrid columns="2">
+									<p:outputLabel value="Url Conexión" />
+									<p:inputText value="#{cifradoControlador.url}" />
+
+									<p:outputLabel value="Usuario" />
+									<p:inputText value="#{cifradoControlador.usuario}" />
+
+									<p:outputLabel value="Clave" />
+									<p:inputText value="#{cifradoControlador.clave}" />
+
+									<p:outputLabel value="Observación" />
+									<p:inputTextarea value="#{cifradoControlador.observacion}" />
+								</p:panelGrid>
+								<p:commandButton id="btnGuardarConexion"
+									style="margin-left: auto;margin-right: auto"
+									value="Generar Conexion"
+									action="#{cifradoControlador.registroConexion()}"
+									update="msgCifrado frmCifrado" />
+							</p:panelGrid>
+							<p:panelGrid
+								rendered="#{cifradoControlador.mostrarDataConexionNativa}"
+								styleClass="ui-noborder"
+								style="margin-left: auto;margin-right: auto">
+
+								<p:dataTable id="dtblConexionNativa" var="conexion"
+									value="#{cifradoControlador.listaConexionNativa}"
+									rowKey="#{conexion.conexionId}" selectionMode="single"
+									selection="#{cifradoControlador.conexionNativa}"
+									paginator="true" rows="10" style="width:100%; height:100%">
+									<p:ajax event="rowSelect"
+										listener="#{cifradoControlador.seleccionarFila}"
+										update=":frmCifrado:conexionDetail"
+										oncomplete="PF('conexionDialog').show()" />
+
+									<p:column headerText="Id" sortBy="#{conexion.conexionId}">
+										<h:outputText value="#{conexion.conexionId}" />
+									</p:column>
+
+									<p:column headerText="Módulo">
+										<h:outputText value="#{conexion.modulo.descripcion}" />
+									</p:column>
+
+									<p:column headerText="Equipo Desarrollo">
+										<h:outputText value="#{conexion.equipo}" />
+									</p:column>
+
+									<p:column headerText="Aplicación">
+										<h:outputText value="#{conexion.codigoAplicacion}" />
+									</p:column>
+
+									<p:column headerText="Estado">
+										<h:outputText value="#{conexion.estado}" />
+									</p:column>
+								</p:dataTable>
+								<br />
+								<p:commandButton id="btnSalir"
+									style="margin-left: auto;margin-right: auto" value="Salir"
+									action="#{cifradoControlador.salirFormulario()}"
+									update="frmCifrado" />
+							</p:panelGrid>
+
+							<p:dialog header="Detalle de la Conexión"
+								widgetVar="conexionDialog" modal="true" showEffect="fade"
+								hideEffect="fade" resizable="true" height="250px" width="1024px"
+								position="center center">
+								<p:outputPanel id="conexionDetail" style="text-align:center;">
+									<p:panelGrid columns="2"
+										rendered="#{not empty cifradoControlador.conexionNativa}"
+										columnClasses="label,value">
+										<h:outputText value="Url Conexión:"
+											style="text-align:left;color:black;font-size:80%" />
+										<h:outputText value="#{cifradoControlador.conexionNativa.url}"
+											style="text-align:left;color:blue;font-size:80%" />
+										<h:outputText value="Usuario:"
+											style="text-align:left;color:black;font-size:80%" />
+										<h:outputText
+											value="#{cifradoControlador.conexionNativa.usuario}"
+											style="text-align:left;color:blue;font-size:80%" />
+										<h:outputText value="Clave:"
+											style="text-align:left;color:black;font-size:80%" />
+										<h:outputText
+											value="#{cifradoControlador.conexionNativa.clave}"
+											style="text-align:left;color:red;font-size:80%" />
+									</p:panelGrid>
+									<br />
+									<p:panelGrid columns="2"
+										rendered="#{not empty cifradoControlador.conexionNativaAux}"
+										columnClasses="label,value">
+										<h:outputText value="Url Conexión:"
+											style="text-align:left;color:black;font-size:80%" />
+										<h:outputText
+											value="#{cifradoControlador.conexionNativaAux.url}"
+											style="text-align:left;color:blue;font-size:80%" />
+										<h:outputText value="Usuario:"
+											style="text-align:left;color:black;font-size:80%" />
+										<h:outputText
+											value="#{cifradoControlador.conexionNativaAux.usuario}"
+											style="text-align:left;color:blue;font-size:80%" />
+										<h:outputText value="Clave:"
+											style="text-align:left;color:black;font-size:80%" />
+										<h:outputText
+											value="#{cifradoControlador.conexionNativaAux.clave}"
+											style="text-align:left;color:red;font-size:80%" />
+									</p:panelGrid>
+									<br />
+									<p:commandButton id="btnDesencriptar"
+										rendered="#{cifradoControlador.mostrarBotonDesenciptar}"
+										style="margin-left: auto;margin-right: auto"
+										value="Desencriptar"
+										action="#{cifradoControlador.desencriptarCadenaSeleccion()}"
+										update="conexionDetail" />
+									<p:commandButton id="btnCerrar"
+										rendered="#{!cifradoControlador.mostrarBotonDesenciptar}"
+										style="margin-left: auto;margin-right: auto" value="Cerrar"
+										action="#{cifradoControlador.cerrarConexionNativa()}"
+										update="conexionDetail"
+										oncomplete="PF('conexionDialog').hide();" />
+
+								</p:outputPanel>
+							</p:dialog>
+						</p:outputPanel>
+					</div>
+				</div>
+			</div>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,65 @@
+<ui:composition template="/plantilla/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+	<ui:define name="breadcrumb">
+		<li>Componentes</li>
+		<li>/</li>
+		<li>Codigo OTP</li>
+	</ui:define>
+	<ui:define name="content">
+		<p:messages id="msgOTP" showDetail="true" />
+		<h:form id="frmOTP" onsubmit="return false;">
+			<div class="ui-g ui-fluid">
+				<div class="ui-g-12 ui-lg-6">
+					<!-- Left Side -->
+					<div class="card card-w-title">
+						<h1>Código OTP para validación de transacción</h1>
+						<p:panelGrid id="pnlOTP" columns="3" styleClass="ui-noborder"
+							style="margin-left: auto;margin-right: auto">
+							<p:outputLabel
+								rendered="#{codigoOTPControlador.generaOTPBtn=='V'}"
+								value="Verificación código OTP" />
+							<p:inputText rendered="#{codigoOTPControlador.generaOTPBtn=='V'}"
+								value="#{codigoOTPControlador.otpCodigo}" maxlength="8">
+								<p:keyFilter mask="num" />
+							</p:inputText>
+							<p:commandButton id="btnValOtp"
+								rendered="#{codigoOTPControlador.generaOTPBtn=='V'}"
+								style="margin-left: auto;margin-right: auto" value="Validar OTP"
+								actionListener="#{codigoOTPControlador.validaOTP()}" />
+							<p:outputLabel
+								rendered="#{codigoOTPControlador.generaOTPBtn=='G'}"
+								value="#{codigoOTPControlador.otpCodigo}" />
+
+							<p:commandButton
+								rendered="#{codigoOTPControlador.generaOTPBtn=='G'}" id="btnOtp"
+								style="margin-left: auto;margin-right: auto" value="Generar OTP"
+								actionListener="#{codigoOTPControlador.generaOTP()}" />
+							<p:outputLabel
+								rendered="#{codigoOTPControlador.generaOTPBtn=='G'}" value="" />
+							<p:outputLabel
+								rendered="#{codigoOTPControlador.generaOTPBtn=='V'}" value="" />
+							<p:outputLabel
+								rendered="#{codigoOTPControlador.generaOTPBtn=='B'}"
+								value="Generación de códigos OTP bloqueadas por intentos fallidos, intente nuevamente en..." />
+							<p:panelGrid id="pnlTiempo"
+								rendered="#{codigoOTPControlador.generaOTPBtn=='V' || codigoOTPControlador.generaOTPBtn=='B'}">
+								<h:outputText id="txtCount"
+									value="#{codigoOTPControlador.tiempoRestante}" />
+								<p:poll interval="1" stop="#{codigoOTPControlador.generaOTPBtn}"
+									async="true"
+									listener="#{codigoOTPControlador.cuentaRegresiva()}" />
+							</p:panelGrid>
+							<p:outputLabel
+								rendered="#{codigoOTPControlador.generaOTPBtn=='V' || codigoOTPControlador.generaOTPBtn=='B'}"
+								value="" />
+						</p:panelGrid>
+					</div>
+				</div>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>

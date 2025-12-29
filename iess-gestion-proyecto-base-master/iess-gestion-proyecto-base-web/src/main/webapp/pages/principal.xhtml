@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/plantilla/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="content">
+        <script type='text/javascript'>
+        	function principal() {
+        		refrescarSesion();
+	        	caducaSesion();
+	        	}
+        	function refrescarSesion() {
+        		var refresh = sessionStorage.getItem('refresh');
+        	    if (refresh === null) {
+        	       	window.location.reload();
+        	        sessionStorage.setItem('refresh', "1");
+        	   	}
+        	}
+        	function caducaSesion() {
+        		var sessionTimeOut = '${facesContext.externalContext.request.session.maxInactiveInterval}';
+        	   	var sessionTimeOutMillis = parseInt(sessionTimeOut) * 1000;
+        	   	setTimeout("window.location.href='#{facesContext.externalContext.request.contextPath}/errorWeb/sesionCaducada.jsf';", sessionTimeOutMillis);
+        	}
+        	window.onload = principal;        	
+		</script>  
+        <h:form id="formulario">
+        </h:form>
+    </ui:define>
+</ui:composition>

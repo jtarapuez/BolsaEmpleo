@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="4.0" 
+         xmlns="http://xmlns.jcp.org/xml/ns/javaee" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">
+    
+        <context-param>
+        <param-name>com.sun.faces.enableRestoreView11Compatibility
+        </param-name>
+        <param-value>true</param-value>
+    </context-param>
+    <context-param>
+        <param-name>javax.faces.PROJECT_STAGE</param-name>
+        <param-value>Production</param-value>
+    </context-param>
+    <context-param>
+        <param-name>primefaces.FONT_AWESOME</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    <context-param>
+        <param-name>primefaces.CLIENT_SIDE_VALIDATION</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    <context-param>
+        <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+        <param-value>client</param-value>
+    </context-param>
+    <context-param>
+        <param-name>javax.faces.FACELETS_BUFFER_SIZE</param-name>
+        <param-value>1096576</param-value>
+    </context-param>
+    <context-param>
+        <param-name>primefaces.THEME</param-name>
+        <param-value>serenity-lightgreen</param-value>
+    </context-param>
+    <context-param>
+        <param-name>javax.faces.FACELETS_LIBRARIES</param-name>
+        <param-value>/WEB-INF/primefaces-serenity.taglib.xml</param-value>
+    </context-param> 
+   
+    <mime-mapping>
+        <extension>eot</extension>
+        <mime-type>application/vnd.ms-fontobject</mime-type>
+    </mime-mapping>
+    <mime-mapping>  
+        <extension>otf</extension>  
+        <mime-type>font/opentype</mime-type>  
+    </mime-mapping>      
+    <mime-mapping>  
+        <extension>ttf</extension>  
+        <mime-type>application/x-font-ttf</mime-type>  
+    </mime-mapping>      
+    <mime-mapping>  
+        <extension>woff</extension>  
+        <mime-type>application/x-font-woff</mime-type>  
+    </mime-mapping>
+    <mime-mapping>  
+        <extension>svg</extension>  
+        <mime-type>image/svg+xml</mime-type>  
+    </mime-mapping>
+    <mime-mapping>  
+        <extension>woff2</extension>  
+        <mime-type>application/x-font-woff2</mime-type>  
+    </mime-mapping>
+
+    
+
+    <!-- FILTROS -->
+    <filter>
+        <filter-name>FiltroUrls</filter-name>
+        <filter-class>ec.gob.iess.componente.autorizador.jsf.filtro.FiltroUrls</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>FiltroUrls</filter-name>
+        <url-pattern>/app/*</url-pattern>
+    </filter-mapping>
+    
+    <!-- GESTION DE ERRORES  -->        
+    <error-page>
+        <error-code>403</error-code>
+        <location>/errorWeb/403.jsf</location>
+    </error-page>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/errorWeb/404.jsf</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/errorWeb/500.jsf</location>
+    </error-page>
+    <error-page>
+        <exception-type>java.lang.Exception</exception-type>
+        <location>/errorWeb/errorAplicacion.jsf</location>
+    </error-page>   
+    <error-page>
+        <exception-type>javax.ejb.EJBException</exception-type>
+        <location>/errorWeb/errorAplicacion.jsf</location>
+    </error-page>
+    
+   	<session-config>
+	<session-timeout>15</session-timeout>
+	<cookie-config>
+			<http-only>true</http-only> <!-- Prevent client side scripting from accessing/manipulating session cookie. -->
+	</cookie-config>
+	<tracking-mode>COOKIE</tracking-mode> <!-- This disables URL rewriting. -->
+	</session-config>
+	
+    <!-- PARAMETRO CODIGO DE APLICACION -->
+    <context-param>
+        <param-name>CODIGO_APLICACION</param-name>
+        <param-value>IESS-ARQ</param-value>
+    </context-param>  
+    
+        <!-- CARGA DE ARCHIVOS -->
+    <filter>
+        <filter-name>PrimeFaces FileUpload Filter</filter-name>
+        <filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>
+        <init-param>
+            <param-name>thresholdSize</param-name>
+            <param-value>2097152</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>PrimeFaces FileUpload Filter</filter-name>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>*.jsf</url-pattern> 
+    </filter-mapping>
+ 
+  
+</web-app>

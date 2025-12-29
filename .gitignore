@@ -1,0 +1,98 @@
+# Archivos del sistema operativo
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Directorios grandes que no deben subirse
+EAP-7.2.0/
+apache-maven-3.9.11/
+
+# Archivos compilados Maven
+**/target/
+**/pom.xml.tag
+**/pom.xml.releaseBackup
+**/pom.xml.versionsBackup
+**/pom.xml.next
+**/release.properties
+**/dependency-reduced-pom.xml
+**/buildNumber.properties
+**/.mvn/timing.properties
+**/.mvn/wrapper/maven-wrapper.jar
+
+# Logs
+*.log
+**/log/
+**/logs/
+**/*.log.*
+
+# Archivos temporales
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+.nfs*
+
+# IDE
+.vscode/
+.idea/
+*.iml
+*.ipr
+*.iws
+.classpath
+.project
+.settings/
+bin/
+
+# Archivos de configuración local
+*.local
+.env
+.env.local
+
+# Archivos de backup
+*.bak
+*.backup
+*~
+
+# Archivos de video/media grandes (si hay)
+*.mp4
+*.webm
+*.mov
+
+# Archivos de certificados y keystores (si contienen información sensible)
+*.keystore
+*.jks
+*.p12
+*.pfx
+
+# Archivos de configuración con información sensible
+**/standalone/configuration/standalone.xml
+**/standalone/configuration/domain.xml
+**/standalone/configuration/host.xml
+
+# Archivos de datos de JBoss
+**/standalone/data/
+**/standalone/tmp/
+**/standalone/deployments/*.ear
+**/standalone/deployments/*.war
+**/standalone/deployments/*.jar
+**/standalone/deployments/*.deployed
+**/standalone/deployments/*.failed
+**/standalone/deployments/*.undeployed
+
+# Archivos de logs de JBoss
+**/standalone/log/
+**/domain/log/
+
+# Archivos de configuración de Maven local
+.m2/repository/
+
+# Archivos de script con credenciales (si los hay)
+*credentials*
+*password*
+*secret*
+

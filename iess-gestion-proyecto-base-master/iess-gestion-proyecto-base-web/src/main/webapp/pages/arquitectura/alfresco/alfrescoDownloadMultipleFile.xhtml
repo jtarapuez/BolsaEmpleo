@@ -1,0 +1,57 @@
+<ui:composition template="/plantilla/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+	<ui:define name="breadcrumb">
+		<li>Componentes</li>
+		<li>/</li>
+		<li>Descarga de archivo multiple</li>
+	</ui:define>
+	<ui:define name="content">
+		<h:form id="formDescargaMultiple">
+			<p:growl id="messages" showDetail="true" />
+			<p:outputPanel id="panelDescargaMultiple">
+				<h:panelGrid columns="3"
+					rendered="#{!alfrescogGestorControlador.gestorDocumentalBean.mostrarUploadFileMultiple}">
+					<h:outputLabel value="Validar Directorio" />
+					<h:inputText
+						value="#{alfrescogGestorControlador.gestorDocumentalBean.url}" />
+					<p:commandButton id="btnValidarDirectorio" value="Validar"
+						action="#{alfrescogGestorControlador.validarDirectorio()}"
+						ajax="false" update="formDescargaMultiple" />
+				</h:panelGrid>
+				<br />
+				<h:panelGrid columns="1"
+					rendered="#{alfrescogGestorControlador.gestorDocumentalBean.mostrarUploadFileMultiple}">
+					<p:dataTable id="checkboxDT" var="var"
+						value="#{alfrescogGestorControlador.alfrescoRespuesta.listaAlfrescoSalida}"
+						selection="#{alfrescogGestorControlador.alfrescoRespuesta.listaAlfrescoSalida}"
+						rowKey="#{var.archivoId}">
+						<p:column selectionMode="multiple"
+							style="width:16px;text-align:center" />
+
+						<p:column headerText="Nombre_Archivo">
+							<h:outputText value="#{var.nombreArchivo}" />
+						</p:column>
+
+						<p:column headerText="Id">
+							<h:outputText value="#{var.archivoId}" />
+						</p:column>
+						
+						<p:column headerText="Id">
+							<h:outputText value="#{var.tipoContenido}" />
+						</p:column>
+
+					</p:dataTable>
+					<p:commandButton value="Descargar Multiple" icon="pi pi-arrow-down"
+						ajax="false" update="formConsulta">
+						<p:fileDownload
+							value="#{alfrescogGestorControlador.descargarArchivoMultiple()}" />
+					</p:commandButton>
+				</h:panelGrid>
+			</p:outputPanel>
+		</h:form>
+	</ui:define>
+</ui:composition>

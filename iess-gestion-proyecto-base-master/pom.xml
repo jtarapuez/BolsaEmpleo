@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>ec.gob.iess</groupId>
+	<artifactId>iess-gestion-proyecto-base</artifactId>
+	<version>3.0.5</version>
+	<packaging>pom</packaging>
+	<name>iess-gestion-proyecto-base</name>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<modulo.version>3.0.5</modulo.version>
+		<!-- <iess-alfresco>1.1.0</iess-alfresco> Desactivado temporalmente -->
+		<cifrado.version>2.0.0</cifrado.version>
+		<javamail.version>1.1.0</javamail.version>		
+		<auditoria.version>1.0.2</auditoria.version>
+		<transversal-ejb.version>1.10.0</transversal-ejb.version>
+		<seguridad-ejb.version>1.7.0</seguridad-ejb.version>
+		<autorizador-jsf.version>1.8.0</autorizador-jsf.version>
+		<cliente-restful.version>1.10.0</cliente-restful.version>
+		<ws-modelo.version>1.9.0</ws-modelo.version>
+		<comun.version>2.3.1</comun.version>
+		<otp.version>1.0.1</otp.version>
+		<lombok.version>1.18.2</lombok.version>
+		<archunitj5.version>0.12.0</archunitj5.version>
+		<jersey.version>2.30</jersey.version>
+		<jakartaee.api.version>8.0.0</jakartaee.api.version>
+		<servlet-api.version>4.0.0</servlet-api.version>
+		<cdi-api.version>2.0.SP1</cdi-api.version>
+		<primefaces.version>8.0</primefaces.version>
+		<faces.version>2.3.5</faces.version>
+		<faces-api.version>2.3</faces-api.version>
+		<audit4j-core.version>2.5.0</audit4j-core.version>
+		<hibernare.version>5.4.19.Final</hibernare.version>
+		<hibernate-validator.version>6.0.15.Final</hibernate-validator.version>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
+	
+	<organization>
+		<name>Instituto Ecuatoriano de Seguridad Social</name>
+		<url>https://www.iess.gob.ec</url>
+	</organization>
+
+	<developers>
+		<developer>
+			<id>ppilcoa</id>
+			<name>Patricio Pilco</name>
+			<organization>Instituto Ecuatoriano de Seguridad Social</organization>
+			<organizationUrl>https://www.iess.gob.ec</organizationUrl>
+			<email>patricio.pilco@iess.gob.ec</email>
+			<roles>
+				<role>Arquitectura</role>
+				<role>Desarrollo</role>
+			</roles>
+			<timezone>+05:30</timezone>
+		</developer>
+	</developers>
+
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<scm>
+		<connection>scm:git:git@gitlab.iess.gob.ec:arquitectura/proyectosbase/iess-gestion-proyecto-base.git</connection>
+		<developerConnection>scm:git:git@gitlab.iess.gob.ec:arquitectura/proyectosbase/iess-gestion-proyecto-base.git</developerConnection>
+		<url>scm:git:git@gitlab.iess.gob.ec:arquitectura/proyectosbase/iess-gestion-proyecto-base.git</url>
+	</scm>
+	
+	<modules>
+		<module>iess-gestion-proyecto-base-ear</module>
+		<module>iess-gestion-proyecto-base-web</module>
+		<module>iess-gestion-proyecto-base-ejb</module>
+	</modules>
+</project>

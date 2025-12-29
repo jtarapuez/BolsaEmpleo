@@ -1,0 +1,51 @@
+<ui:composition template="/plantilla/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+	<ui:define name="breadcrumb">
+		<li>Componentes</li>
+		<li>/</li>
+		<li>Alfresco</li>
+	</ui:define>
+	<ui:define name="content">
+		<p:growl id="messages" showDetail="true" />
+
+		<div class="card">
+			<h5>Crear Archivo Simple</h5>
+			<h:form id="frmUploadSimple" enctype="multipart/form-data">
+				<p:outputPanel id="pnlUploadSimpleFile">
+					<h:panelGrid columns="3"
+						rendered="#{!alfrescogGestorControlador.gestorDocumentalBean.mostrarUploadFileSimple}">
+						<h:outputLabel value="Nombre Directorio:" />
+						<h:inputText id="txtNombreDirectorio"
+							value="#{alfrescogGestorControlador.gestorDocumentalBean.url}"
+							required="true" requiredMessage="Campo requerido">
+						</h:inputText>
+						<p:commandButton id="btnCrearDirectorio" value="Crear Directorio"
+							ajax="false"
+							action="#{alfrescogGestorControlador.generarDirectorioAlfresco()}"
+							update="pnlUploadSimpleFile" styleClass="mt-3 ui-button-outlined block" />
+					</h:panelGrid>
+					<br />
+					<h:panelGrid columns="2" id="pnlUploadFile"
+						rendered="#{alfrescogGestorControlador.gestorDocumentalBean.mostrarUploadFileSimple}">
+						<p:fileUpload value="#{alfrescogGestorControlador.uploadedFile}"
+							label="Seleccionar..." mode="simple" fileLimit="1"
+							required="true" sizeLimit="30000000"
+							invalidSizeMessage="El tamaÃ±o debe ser menor a 30 MB"
+							invalidFileMessage="El formato debe ser pdf"
+							allowTypes="/(\.|\/)(pdf|doc?x|txt)$/" skinSimple="true">
+							<auto>true</auto>
+						</p:fileUpload>
+						<p:commandButton value="Cargar Archivo" ajax="false"
+							action="#{alfrescogGestorControlador.crearArchivoSimple()}"
+							styleClass="mt-3 ui-button-outlined block" update="frmUploadSimple"/>
+					</h:panelGrid>
+				</p:outputPanel>
+			</h:form>
+		</div>
+		<h3>Maximum size: 30 MB</h3>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,62 @@
+<ui:composition template="/plantilla/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+	<ui:define name="breadcrumb">
+		<li>Componentes</li>
+		<li>/</li>
+		<li>Buscar Archivo Por Nombre</li>
+	</ui:define>
+	<ui:define name="content">
+		<p:growl id="messages" showDetail="true" />
+		<h:form id="formDownloadSingleFile">
+			<p:outputPanel id="pnlBusquedaArchivo">
+				<h:panelGrid columns="3"
+					rendered="#{!alfrescogGestorControlador.gestorDocumentalBean.mostrarUploadFileSimple}">
+					<h:outputLabel value="Nombre Directorio:" />
+					<h:inputText id="txtDirectorio"
+						value="#{alfrescogGestorControlador.gestorDocumentalBean.url}"
+						required="true" requiredMessage="Campo requerido">
+					</h:inputText>
+					<p:commandButton id="btnGenerarDirectorio" value="Crear Directorio"
+						ajax="false"
+						action="#{alfrescogGestorControlador.generarDirectorioAlfresco()}"
+						update="pnlUploadSimpleFile"
+						styleClass="mt-3 ui-button-outlined block" />
+				</h:panelGrid>
+
+				<h:panelGrid
+					rendered="#{alfrescogGestorControlador.gestorDocumentalBean.mostrarUploadFileSimple}">
+					<p:selectOneRadio id="slcTipoBusqueda"
+						value="#{alfrescogGestorControlador.gestorDocumentalBean.opcion}"
+						layout="lineDirection" required="true" requiredMessage="Campo requerido">
+						<f:selectItem itemLabel="Id:" itemValue="I" />
+						<f:selectItem itemLabel="URL:" itemValue="U" />
+						<f:selectItem itemLabel="Nombre:" itemValue="N" />
+						<p:ajax event="change" update="pnlBusquedaArchivo" />
+					</p:selectOneRadio>
+					<br />
+					<h:panelGrid columns="4">
+						<h:outputLabel value="Crietrio de busqueda:" />
+						<h:inputText id="txtParametro"
+							value="#{alfrescogGestorControlador.gestorDocumentalBean.parametro}"
+							required="true" requiredMessage="Campo requerido">
+						</h:inputText>
+						<p:commandButton id="btnBuscarArchivo" value="Búsqueda"
+							ajax="false"
+							action="#{alfrescogGestorControlador.buscarArchivo()}"
+							update="formDownloadSingleFile"
+							styleClass="mt-3 ui-button-outlined block" />
+						<p:commandButton value="Download" icon="pi pi-arrow-down"
+							ajax="false">
+							<p:fileDownload
+								value="#{alfrescogGestorControlador.descargarArchivo()}" />
+						</p:commandButton>
+					</h:panelGrid>
+				</h:panelGrid>
+			</p:outputPanel>
+		</h:form>
+	</ui:define>
+</ui:composition>

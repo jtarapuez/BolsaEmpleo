@@ -1,0 +1,12 @@
+!Configuration
+handlers: 
+- !org.audit4j.core.handler.ConsoleAuditHandler {}
+- !org.audit4j.core.handler.file.FileAuditHandler {}
+layout: !ec.gob.iess.componente.auditoria.core.layout.IessLayout {}
+#layout: !org.audit4j.core.layout.CustomizableLayout
+#   dateFormat: yyyy/MM/dd HH:mm:ss
+#   template: ${eventDate}|${uuid}|${actor}|${origin}|${app}|${action} => ${foreach fields field}[${field.name}:${field.value}]${end}
+ 
+metaData: !ec.gob.iess.componente.auditoria.core.IessMetaData {} 
+properties: 
+   log.file.location: user.dir
