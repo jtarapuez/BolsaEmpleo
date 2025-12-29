@@ -106,10 +106,19 @@ public class RegistroPostulanteBean implements Serializable {
     }
 
     /**
-     * Obtener el porcentaje de progreso
+     * Obtener el porcentaje de progreso para la línea del stepper
+     * Calcula el porcentaje basado en los pasos completados
      */
     public int getPorcentajeProgreso() {
-        return (pasoActual * 100) / TOTAL_PASOS;
+        if (pasoActual == 1) {
+            return 0;
+        } else if (pasoActual == 2) {
+            return 33;
+        } else if (pasoActual == 3) {
+            return 66;
+        } else {
+            return 100;
+        }
     }
 }
 

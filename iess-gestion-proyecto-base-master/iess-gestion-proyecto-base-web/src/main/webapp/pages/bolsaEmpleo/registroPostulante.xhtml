@@ -27,6 +27,17 @@
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
+        .logo-header {
+            max-width: 1200px;
+            margin: 0 auto 10px auto;
+            text-align: left;
+            padding: 0 20px;
+        }
+        .logo-header img {
+            max-width: 250px;
+            height: auto;
+            display: inline-block;
+        }
         .page-title {
             font-size: 24px;
             font-weight: 600;
@@ -37,6 +48,12 @@
     </style>
 </h:head>
 <h:body>
+    <!-- Logo en la cabecera - Arriba del contenido blanco -->
+    <div class="logo-header">
+        <h:graphicImage library="images" name="LogoOfertaTrabajo.png" 
+                      alt="Logo Bolsa de Empleo" />
+    </div>
+    
     <div class="container">
         <h1 class="page-title">Registro de Postulante - Bolsa de Empleo</h1>
         

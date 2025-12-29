@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <f:facet name="first">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    </f:facet>
+    <title>Registro de Postulante - Bolsa de Empleo (Stepper)</title>
+    <link rel="icon" type="image/png" href="#{request.contextPath}/serenity-layout/images/favicon.ico" />
+    <!-- CSS externo comentado para evitar conflictos - usando estilos inline -->
+    <!-- <h:outputStylesheet name="css/stepper.css" /> -->
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .logo-header {
+            max-width: 1200px;
+            margin: 0 auto 10px auto;
+            text-align: left;
+            padding: 0 20px;
+        }
+        .logo-header img {
+            max-width: 250px;
+            height: auto;
+            display: inline-block;
+        }
+        .page-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #1976d2;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        /* ============================================
+           PERSONALIZACIÓN: Círculo plomo, activo azul #54c2e9
+           Texto debajo, sin negrilla
+           ============================================ */
+        
+        /* Lista de pasos del wizard */
+        .custom-wizard-stepper .ui-wizard-step-titles,
+        .custom-wizard-stepper ul.ui-wizard-step-titles {
+            display: flex !important;
+            justify-content: space-between !important;
+            align-items: flex-start !important;
+            position: relative !important;
+            padding: 0 !important;
+            margin: 40px 0 60px 0 !important;
+            list-style: none !important;
+            width: 100% !important;
+            background: transparent !important;
+            border: none !important;
+        }
+        
+        /* Línea de fondo gris */
+        .custom-wizard-stepper .ui-wizard-step-titles::before {
+            content: '' !important;
+            position: absolute !important;
+            top: 25px !important;
+            left: 0 !important;
+            right: 0 !important;
+            height: 4px !important;
+            background-color: #e0e0e0 !important;
+            z-index: 1 !important;
+        }
+        
+        /* Línea de progreso - Azul #54c2e9 */
+        .custom-wizard-stepper .ui-wizard-step-titles::after {
+            content: '' !important;
+            position: absolute !important;
+            top: 25px !important;
+            left: 0 !important;
+            height: 4px !important;
+            background-color: #54c2e9 !important;
+            transition: width 0.5s ease !important;
+            z-index: 2 !important;
+            width: 0% !important;
+        }
+        
+        /* ============================================
+           STEPPER SIMPLIFICADO - EL LI ES EL CÍRCULO
+           ============================================ */
+        
+        /* Cada paso del stepper */
+        .custom-wizard-stepper .ui-wizard-step-titles li {
+            position: relative !important;
+            z-index: 3 !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            flex: 1 !important;
+            list-style: none !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            float: none !important;
+        }
+        
+        /* El LI es el CÍRCULO */
+        .custom-wizard-stepper .ui-wizard-step-titles li.ui-wizard-step-title {
+            width: 50px !important;
+            height: 50px !important;
+            min-width: 50px !important;
+            min-height: 50px !important;
+            max-width: 50px !important;
+            max-height: 50px !important;
+            border-radius: 50% !important;
+            background-color: #54c2e9 !important; /* Azul por defecto */
+            background: #54c2e9 !important;
+            border: none !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            font-weight: normal !important;
+            font-size: 18px !important;
+            color: #ffffff !important; /* Texto blanco dentro del círculo */
+            transition: all 0.3s ease !important;
+            cursor: pointer !important;
+            margin: 0 auto !important;
+            padding: 0 !important;
+            box-shadow: none !important;
+            text-decoration: none !important;
+            text-align: center !important;
+            line-height: 50px !important;
+            overflow: hidden !important; /* Ocultar texto que sobresalga */
+        }
+        
+        /* Paso activo - Azul oscuro */
+        .custom-wizard-stepper .ui-wizard-step-titles li.ui-wizard-step-title.ui-state-highlight {
+            background-color: #3081c7 !important;
+            background: #3081c7 !important;
+            border: none !important;
+            color: #ffffff !important;
+            box-shadow: none !important;
+            transform: none !important;
+        }
+        
+        /* Paso completado - Verde */
+        .custom-wizard-stepper .ui-wizard-step-titles li.ui-wizard-step-title.ui-state-complete {
+            background-color: #4caf50 !important;
+            background: #4caf50 !important;
+            border: none !important;
+            color: #ffffff !important;
+        }
+        
+        /* Checkmark para paso completado */
+        .custom-wizard-stepper .ui-wizard-step-titles li.ui-wizard-step-title.ui-state-complete::after {
+            content: '✓' !important;
+            font-size: 24px !important;
+            color: #ffffff !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            width: 100% !important;
+            height: 100% !important;
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            z-index: 6 !important;
+        }
+        
+        /* Ocultar número cuando está completado */
+        .custom-wizard-stepper .ui-wizard-step-titles li.ui-wizard-step-title.ui-state-complete::before {
+            display: none !important;
+        }
+        
+        /* NÚMEROS 1, 2, 3, 4 dentro de los círculos */
+        .custom-wizard-stepper .ui-wizard-step-titles li.ui-wizard-step-title:nth-child(1)::before {
+            content: '1' !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            width: 100% !important;
+            height: 100% !important;
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            font-size: 18px !important;
+            font-weight: normal !important;
+            color: #ffffff !important;
+            z-index: 5 !important;
+        }
+        
+        .custom-wizard-stepper .ui-wizard-step-titles li.ui-wizard-step-title:nth-child(2)::before {
+            content: '2' !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            width: 100% !important;
+            height: 100% !important;
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            font-size: 18px !important;
+            font-weight: normal !important;
+            color: #ffffff !important;
+            z-index: 5 !important;
+        }
+        
+        .custom-wizard-stepper .ui-wizard-step-titles li.ui-wizard-step-title:nth-child(3)::before {
+            content: '3' !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            width: 100% !important;
+            height: 100% !important;
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            font-size: 18px !important;
+            font-weight: normal !important;
+            color: #ffffff !important;
+            z-index: 5 !important;
+        }
+        
+        .custom-wizard-stepper .ui-wizard-step-titles li.ui-wizard-step-title:nth-child(4)::before {
+            content: '4' !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            width: 100% !important;
+            height: 100% !important;
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            font-size: 18px !important;
+            font-weight: normal !important;
+            color: #ffffff !important;
+            z-index: 5 !important;
+        }
+        
+        /* Ocultar contenido interno del círculo (números y texto de PrimeFaces) */
+        .custom-wizard-stepper .ui-wizard-step-titles li.ui-wizard-step-title .ui-wizard-step-number,
+        .custom-wizard-stepper .ui-wizard-step-titles li.ui-wizard-step-title span,
+        .custom-wizard-stepper .ui-wizard-step-titles li.ui-wizard-step-title a {
+            display: none !important;
+        }
+        
+        /* Asegurar que el checkmark esté dentro del círculo */
+        .custom-wizard-stepper .ui-wizard-step-titles li.ui-wizard-step-title.ui-state-complete .ui-wizard-step-number {
+            display: none !important;
+        }
+        
+        .stepper-content {
+            margin-top: 30px;
+            min-height: 400px;
+        }
+        
+        .stepper-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        .stepper-button {
+            padding: 10px 30px;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .stepper-button-back {
+            background-color: #f5f5f5;
+            color: #424242;
+        }
+        
+        .stepper-button-back:hover {
+            background-color: #e0e0e0;
+        }
+        
+        .stepper-button-next {
+            background-color: #1976d2;
+            color: #ffffff;
+        }
+        
+        .stepper-button-next:hover {
+            background-color: #1565c0;
+        }
+    </style>
+</h:head>
+<h:body>
+    <!-- Logo en la cabecera - Arriba del contenido blanco -->
+    <div class="logo-header">
+        <h:graphicImage library="images" name="LogoOfertaTrabajo.png" 
+                      alt="Logo Bolsa de Empleo" />
+    </div>
+    
+    <div class="container">
+        <h1 class="page-title">Registro de Postulante - Bolsa de Empleo</h1>
+        
+        <h:form id="formRegistroPostulanteStepper">
+            <p:messages closable="true" />
+            
+            <!-- Contenido del Wizard - Personalizado con CSS -->
+            <div class="stepper-content">
+                <p:wizard showNavBar="true"
+                          styleClass="custom-wizard-stepper"
+                          widgetVar="stepperWizard"
+                          flowListener="#{registroPostulanteBean.onFlowProcess}">
+                
+                    <!-- PASO 1: Información Básica -->
+                    <p:tab id="infoBasica" title="Información Básica">
+                        <div class="ui-g ui-fluid" style="margin-top: 20px;">
+                            <div class="ui-g-12">
+                                <h3>Paso 1: Información Básica</h3>
+                                <p>En este paso se registrarán los datos personales del postulante.</p>
+                                <p><strong>Tabla:</strong> boe_aspirante_tbl</p>
+                                <p>Los campos de este paso incluyen:</p>
+                                <ul>
+                                    <li>Número de cédula</li>
+                                    <li>Fecha de emisión</li>
+                                    <li>Nombres y apellidos</li>
+                                    <li>Correo electrónico</li>
+                                    <li>Teléfono</li>
+                                    <li>Dirección</li>
+                                    <li>Otros datos personales</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </p:tab>
+                    
+                    <!-- PASO 2: Formación Académica -->
+                    <p:tab id="formacionAcademica" title="Formación Académica">
+                        <div class="ui-g ui-fluid" style="margin-top: 20px;">
+                            <div class="ui-g-12">
+                                <h3>Paso 2: Formación Académica</h3>
+                                <p>En este paso se registrará la formación académica del postulante.</p>
+                                <p><strong>Tabla:</strong> boe_informacion_academica_tbl</p>
+                                <p>Los campos de este paso incluyen:</p>
+                                <ul>
+                                    <li>Nivel educativo</li>
+                                    <li>Institución</li>
+                                    <li>Título obtenido</li>
+                                    <li>Área de estudio</li>
+                                    <li>Fechas de inicio y fin</li>
+                                    <li>Estado del estudio</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </p:tab>
+                    
+                    <!-- PASO 3: Experiencia Laboral -->
+                    <p:tab id="experienciaLaboral" title="Experiencia Laboral">
+                        <div class="ui-g ui-fluid" style="margin-top: 20px;">
+                            <div class="ui-g-12">
+                                <h3>Paso 3: Experiencia Laboral</h3>
+                                <p>En este paso se registrará la experiencia laboral del postulante.</p>
+                                <p><strong>Tabla:</strong> boe_antecedentes_laborales_tbl</p>
+                                <p>Los campos de este paso incluyen:</p>
+                                <ul>
+                                    <li>Nombre de la empresa</li>
+                                    <li>Cargo desempeñado</li>
+                                    <li>Área de trabajo</li>
+                                    <li>Funciones realizadas</li>
+                                    <li>Fechas de inicio y fin</li>
+                                    <li>Referencias laborales</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </p:tab>
+                    
+                    <!-- PASO 4: Cursos y Conocimientos -->
+                    <p:tab id="cursosConocimientos" title="Cursos y Conocimientos">
+                        <div class="ui-g ui-fluid" style="margin-top: 20px;">
+                            <div class="ui-g-12">
+                                <h3>Paso 4: Cursos y Conocimientos</h3>
+                                <p>En este paso se registrarán los cursos y conocimientos adicionales del postulante.</p>
+                                <p><strong>Tabla:</strong> boe_conocimientos_adicionales_tbl</p>
+                                <p>Los campos de este paso incluyen:</p>
+                                <ul>
+                                    <li>Nombre del curso</li>
+                                    <li>Institución</li>
+                                    <li>Tipo de curso</li>
+                                    <li>Área de estudio</li>
+                                    <li>Horas de duración</li>
+                                    <li>Certificado obtenido</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </p:tab>
+                    
+                </p:wizard>
+            </div>
+            
+            <!-- Botones de navegación personalizados -->
+            <div class="stepper-buttons">
+                <p:commandButton value="Anterior" 
+                                 onclick="PF('stepperWizard').back(); return false;"
+                                 styleClass="stepper-button stepper-button-back" />
+                
+                <p:commandButton value="Siguiente" 
+                                 onclick="PF('stepperWizard').next(); return false;"
+                                 styleClass="stepper-button stepper-button-next" />
+            </div>
+        </h:form>
+    </div>
+    
+    <!-- JavaScript para actualizar línea de progreso y forzar visualización del texto -->
+    <h:outputScript>
+        // Función para forzar la visualización del texto debajo de los círculos
+        function forceShowStepLabels() {
+            var stepTitles = document.querySelectorAll('.custom-wizard-stepper .ui-wizard-step-titles li.ui-wizard-step-title');
+            stepTitles.forEach(function(li) {
+                // Buscar todos los spans que contengan texto (labels)
+                var spans = li.querySelectorAll('span');
+                spans.forEach(function(span) {
+                    // Si no es el número, mostrarlo debajo del círculo
+                    if (!span.classList.contains('ui-wizard-step-number')) {
+                        var text = span.textContent.trim();
+                        if (text &amp;&amp; text.length > 0) {
+                            span.style.display = 'block';
+                            span.style.position = 'absolute';
+                            span.style.top = '60px';
+                            span.style.left = '50%';
+                            span.style.transform = 'translateX(-50%)';
+                            span.style.width = '140px';
+                            span.style.fontSize = '11px';
+                            span.style.color = '#000000';
+                            span.style.textAlign = 'center';
+                            span.style.lineHeight = '1.3';
+                            span.style.fontWeight = 'normal';
+                            span.style.zIndex = '10';
+                            span.style.whiteSpace = 'normal';
+                            span.style.wordWrap = 'break-word';
+                            span.style.visibility = 'visible';
+                            span.style.opacity = '1';
+                        }
+                    }
+                });
+                
+                // También buscar labels directamente
+                var labels = li.querySelectorAll('.ui-wizard-step-label');
+                labels.forEach(function(label) {
+                    label.style.display = 'block';
+                    label.style.position = 'absolute';
+                    label.style.top = '60px';
+                    label.style.left = '50%';
+                    label.style.transform = 'translateX(-50%)';
+                    label.style.width = '140px';
+                    label.style.fontSize = '11px';
+                    label.style.color = '#000000';
+                    label.style.textAlign = 'center';
+                    label.style.lineHeight = '1.3';
+                    label.style.fontWeight = 'normal';
+                    label.style.zIndex = '10';
+                    label.style.visibility = 'visible';
+                    label.style.opacity = '1';
+                });
+            });
+        }
+        
+        // Función para actualizar la línea de progreso según el paso activo del wizard
+        function updateWizardProgressLine() {
+            var wizardNav = document.querySelector('.custom-wizard-stepper .ui-wizard-nav');
+            if (wizardNav) {
+                var activeStep = wizardNav.querySelector('li.ui-state-active');
+                if (activeStep) {
+                    var stepIndex = Array.from(wizardNav.children).indexOf(activeStep);
+                    var porcentaje = (stepIndex / (wizardNav.children.length - 1)) * 100;
+                    
+                    // Actualizar el ::after que es la línea de progreso
+                    var style = document.createElement('style');
+                    style.id = 'wizard-progress-style';
+                    var existingStyle = document.getElementById('wizard-progress-style');
+                    if (existingStyle) {
+                        existingStyle.remove();
+                    }
+                    style.textContent = '.custom-wizard-stepper .ui-wizard-nav::after { width: ' + porcentaje + '% !important; }';
+                    document.head.appendChild(style);
+                }
+            }
+        }
+        
+        // Función de inicialización
+        function initStepper() {
+            forceShowStepLabels();
+            updateWizardProgressLine();
+        }
+        
+        // Inicializar al cargar
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function() {
+                setTimeout(initStepper, 300);
+                setTimeout(initStepper, 1000); // Segundo intento después de 1 segundo
+            });
+        } else {
+            setTimeout(initStepper, 300);
+            setTimeout(initStepper, 1000); // Segundo intento después de 1 segundo
+        }
+        
+        // Actualizar después de que PrimeFaces actualice el formulario
+        if (window.PrimeFaces &amp;&amp; window.PrimeFaces.ajax &amp;&amp; typeof window.PrimeFaces.ajax.addOnUpdateCallback === 'function') {
+            PrimeFaces.ajax.addOnUpdateCallback(function() {
+                setTimeout(initStepper, 100);
+            });
+        }
+        
+        // Usar MutationObserver como respaldo
+        if (window.MutationObserver) {
+            var observer = new MutationObserver(function(mutations) {
+                setTimeout(initStepper, 200);
+            });
+            observer.observe(document.body, {
+                childList: true,
+                subtree: true
+            });
+        }
+    </h:outputScript>
+</h:body>
+</html>
+
+
