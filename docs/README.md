@@ -11,6 +11,7 @@ Comandos útiles para el desarrollo y despliegue del proyecto.
 
 - **[COMANDOS_DESPLIEGUE.md](./comandos/COMANDOS_DESPLIEGUE.md)** - Comandos para compilar, generar EAR y desplegar
 - **[COMANDOS_VALIDACION.md](./comandos/COMANDOS_VALIDACION.md)** - Comandos para validar el entorno y configuración
+- **[COMANDOS_GIT.md](./comandos/COMANDOS_GIT.md)** - Comandos Git para subir cambios manualmente
 
 ### 🔧 [Correcciones](./correcciones/)
 Documentación de correcciones y cambios realizados.
@@ -37,6 +38,14 @@ Resúmenes y documentos de referencia rápida.
 
 - **[RESUMEN_CAMBIOS_RAPIDO.md](./resumenes/RESUMEN_CAMBIOS_RAPIDO.md)** - Resumen rápido de cambios
 - **[RESUMEN_FALTANTE.md](./resumenes/RESUMEN_FALTANTE.md)** - Resumen de elementos faltantes
+
+### 🐘 [PostgreSQL](./postgresql/)
+Documentación de configuración y conexión a PostgreSQL.
+
+- **[INSTALACION_POSTGRESQL.md](./postgresql/INSTALACION_POSTGRESQL.md)** - Guía de instalación de PostgreSQL 16 en macOS
+- **[CONFIGURAR_CONEXION_REMOTA_POSTGRESQL.md](./postgresql/CONFIGURAR_CONEXION_REMOTA_POSTGRESQL.md)** - Configuración de conexión remota
+- **[DATOS_CONEXION_REMOTA.md](./postgresql/DATOS_CONEXION_REMOTA.md)** - Datos de conexión a la base de datos remota
+- **[REFRESCAR_DBEAVER.md](./postgresql/REFRESCAR_DBEAVER.md)** - Cómo refrescar conexión en DBeaver
 
 ---
 

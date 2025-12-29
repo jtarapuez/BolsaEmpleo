@@ -40,6 +40,11 @@ http://localhost:8081/iess-gestion-proyecto-base-web/pages/arquitectura/alfresco
 http://localhost:8081/iess-gestion-proyecto-base-web/public/pagina.jsf
 ```
 
+#### Páginas de Bolsa de Empleo
+```
+http://localhost:8081/iess-gestion-proyecto-base-web/pages/bolsaEmpleo/registroPostulante.jsf
+```
+
 ---
 
 ## 🖥️ URLs DEL SERVIDOR JBOSS

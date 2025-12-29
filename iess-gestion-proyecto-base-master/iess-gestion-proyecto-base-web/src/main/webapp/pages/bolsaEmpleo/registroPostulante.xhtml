@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <f:facet name="first">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    </f:facet>
+    <title>Registro de Postulante - Bolsa de Empleo</title>
+    <link rel="icon" type="image/png" href="#{request.contextPath}/serenity-layout/images/favicon.ico" />
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .page-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #1976d2;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+    </style>
+</h:head>
+<h:body>
+    <div class="container">
+        <h1 class="page-title">Registro de Postulante - Bolsa de Empleo</h1>
+        
+        <h:form id="formRegistroPostulante">
+            <p:messages closable="true" />
+            
+            <!-- Stepper Personalizado -->
+            <div class="stepper-container">
+                <div class="stepper-content">
+                    <p:wizard showNavBar="false"
+                              styleClass="custom-wizard"
+                              widgetVar="stepperWizard">
+                    
+                    <!-- PASO 1: Información Básica -->
+                    <p:tab id="infoBasica" title="Información Básica">
+                        <div class="ui-g ui-fluid" style="margin-top: 20px;">
+                            <div class="ui-g-12">
+                                <h3>Paso 1: Información Básica</h3>
+                                <p>En este paso se registrarán los datos personales del postulante.</p>
+                                <p><strong>Tabla:</strong> boe_aspirante_tbl</p>
+                                <p>Los campos de este paso incluyen:</p>
+                                <ul>
+                                    <li>Número de cédula</li>
+                                    <li>Fecha de emisión</li>
+                                    <li>Nombres y apellidos</li>
+                                    <li>Correo electrónico</li>
+                                    <li>Teléfono</li>
+                                    <li>Dirección</li>
+                                    <li>Otros datos personales</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </p:tab>
+                    
+                    <!-- PASO 2: Formación Académica -->
+                    <p:tab id="formacionAcademica" title="Formación Académica">
+                        <div class="ui-g ui-fluid" style="margin-top: 20px;">
+                            <div class="ui-g-12">
+                                <h3>Paso 2: Formación Académica</h3>
+                                <p>En este paso se registrará la formación académica del postulante.</p>
+                                <p><strong>Tabla:</strong> boe_informacion_academica_tbl</p>
+                                <p>Los campos de este paso incluyen:</p>
+                                <ul>
+                                    <li>Nivel educativo</li>
+                                    <li>Institución</li>
+                                    <li>Título obtenido</li>
+                                    <li>Área de estudio</li>
+                                    <li>Fechas de inicio y fin</li>
+                                    <li>Estado del estudio</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </p:tab>
+                    
+                    <!-- PASO 3: Experiencia Laboral -->
+                    <p:tab id="experienciaLaboral" title="Experiencia Laboral">
+                        <div class="ui-g ui-fluid" style="margin-top: 20px;">
+                            <div class="ui-g-12">
+                                <h3>Paso 3: Experiencia Laboral</h3>
+                                <p>En este paso se registrará la experiencia laboral del postulante.</p>
+                                <p><strong>Tabla:</strong> boe_antecedentes_laborales_tbl</p>
+                                <p>Los campos de este paso incluyen:</p>
+                                <ul>
+                                    <li>Nombre de la empresa</li>
+                                    <li>Cargo desempeñado</li>
+                                    <li>Área de trabajo</li>
+                                    <li>Funciones realizadas</li>
+                                    <li>Fechas de inicio y fin</li>
+                                    <li>Referencias laborales</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </p:tab>
+                    
+                    <!-- PASO 4: Cursos y Conocimientos -->
+                    <p:tab id="cursosConocimientos" title="Cursos y Conocimientos">
+                        <div class="ui-g ui-fluid" style="margin-top: 20px;">
+                            <div class="ui-g-12">
+                                <h3>Paso 4: Cursos y Conocimientos</h3>
+                                <p>En este paso se registrarán los cursos y conocimientos adicionales del postulante.</p>
+                                <p><strong>Tabla:</strong> boe_conocimientos_adicionales_tbl</p>
+                                <p>Los campos de este paso incluyen:</p>
+                                <ul>
+                                    <li>Nombre del curso</li>
+                                    <li>Institución</li>
+                                    <li>Tipo de curso</li>
+                                    <li>Área de estudio</li>
+                                    <li>Horas de duración</li>
+                                    <li>Certificado obtenido</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </p:tab>
+                    
+                </p:wizard>
+                </div>
+                
+                <!-- Botones de navegación personalizados -->
+                <div class="stepper-buttons">
+                    <p:commandButton value="Anterior" 
+                                     onclick="PF('stepperWizard').back(); return false;"
+                                     styleClass="stepper-button stepper-button-back" />
+                    
+                    <p:commandButton value="Siguiente" 
+                                     onclick="PF('stepperWizard').next(); return false;"
+                                     styleClass="stepper-button stepper-button-next" />
+                </div>
+            </div>
+        </h:form>
+    </div>
+</h:body>
+</html>
+
