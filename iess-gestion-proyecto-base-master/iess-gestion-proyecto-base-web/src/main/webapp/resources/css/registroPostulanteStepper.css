@@ -1,0 +1,293 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 20px;
+}
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.logo-header {
+    max-width: 1200px;
+    margin: 0 auto 10px auto;
+    text-align: left;
+    padding: 0 20px;
+}
+.logo-header img {
+    max-width: 250px;
+    height: auto;
+    display: inline-block;
+}
+.page-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #1976d2;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* ============================================
+   STEPPER INDEPENDIENTE - SIN CONFLICTOS CON PRIMEFACES
+   ============================================ */
+
+/* Ocultar completamente el navbar de PrimeFaces */
+.custom-wizard-stepper .ui-wizard-navbar,
+.custom-wizard-stepper .ui-wizard-step-titles {
+    display: none !important;
+}
+
+/* Contenedor del stepper personalizado */
+.custom-stepper-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    position: relative;
+    margin: 40px 0 80px 0;
+    padding: 0;
+    width: 100%;
+}
+
+/* Línea de fondo gris */
+.custom-stepper-container::before {
+    content: '';
+    position: absolute;
+    top: 25px;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background-color: #e0e0e0;
+    z-index: 1;
+}
+
+/* Línea de progreso azul */
+.custom-stepper-progress {
+    position: absolute;
+    top: 25px;
+    left: 0;
+    height: 4px;
+    background-color: #54c2e9;
+    transition: width 0.5s ease;
+    z-index: 2;
+    width: 0%;
+}
+
+/* Cada paso del stepper */
+.custom-stepper-step {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    cursor: pointer;
+}
+
+/* Círculo del paso */
+.custom-stepper-circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #54c2e9; /* Azul claro por defecto */
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: normal;
+    color: #ffffff;
+    transition: all 0.3s ease;
+    position: relative;
+    margin: 0 auto;
+}
+
+/* Paso activo - Azul oscuro */
+.custom-stepper-step.active .custom-stepper-circle {
+    background-color: #3081c7;
+}
+
+/* Paso completado - Verde */
+.custom-stepper-step.completed .custom-stepper-circle {
+    background-color: #4caf50;
+}
+
+/* Checkmark para paso completado */
+.custom-stepper-step.completed .custom-stepper-circle::after {
+    content: '✓';
+    font-size: 24px;
+    color: #ffffff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Ocultar número cuando está completado */
+.custom-stepper-step.completed .custom-stepper-number {
+    display: none;
+}
+
+/* Texto debajo del círculo */
+.custom-stepper-label {
+    margin-top: 10px;
+    font-size: 11px;
+    color: #000000;
+    text-align: center;
+    line-height: 1.3;
+    font-weight: normal;
+    width: 140px;
+    word-wrap: break-word;
+}
+
+.stepper-content {
+    margin-top: 30px;
+    min-height: 400px;
+}
+
+.stepper-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.stepper-button {
+    padding: 10px 30px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.stepper-button-back {
+    background-color: #f5f5f5;
+    color: #424242;
+}
+
+.stepper-button-back:hover {
+    background-color: #e0e0e0;
+}
+
+.stepper-button-next {
+    background-color: #1976d2;
+    color: #ffffff;
+}
+
+.stepper-button-next:hover {
+    background-color: #1565c0;
+}
+
+/* ============================================
+   RESPONSIVE - DISPOSITIVOS MÓVILES
+   ============================================ */
+
+@media screen and (max-width: 768px) {
+    /* Contenedor del stepper en móviles */
+    .custom-stepper-container {
+        margin: 20px 0 60px 0;
+        padding: 0 10px;
+    }
+    
+    /* Línea de fondo gris - más delgada en móviles */
+    .custom-stepper-container::before {
+        top: 20px;
+        height: 3px;
+    }
+    
+    /* Línea de progreso - más delgada */
+    .custom-stepper-progress {
+        top: 20px;
+        height: 3px;
+    }
+    
+    /* Círculos más pequeños en móviles */
+    .custom-stepper-circle {
+        width: 40px;
+        height: 40px;
+        font-size: 14px;
+    }
+    
+    /* Checkmark más pequeño */
+    .custom-stepper-step.completed .custom-stepper-circle::after {
+        font-size: 18px;
+    }
+    
+    /* Texto más pequeño y más compacto */
+    .custom-stepper-label {
+        margin-top: 8px;
+        font-size: 9px;
+        width: 80px;
+        line-height: 1.2;
+    }
+    
+    /* Cada paso con menos espacio */
+    .custom-stepper-step {
+        flex: 1;
+        min-width: 0;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    /* Contenedor del stepper en móviles pequeños */
+    .custom-stepper-container {
+        margin: 15px 0 50px 0;
+        padding: 0 5px;
+    }
+    
+    /* Línea de fondo gris - aún más delgada */
+    .custom-stepper-container::before {
+        top: 18px;
+        height: 2px;
+    }
+    
+    /* Línea de progreso - aún más delgada */
+    .custom-stepper-progress {
+        top: 18px;
+        height: 2px;
+    }
+    
+    /* Círculos aún más pequeños */
+    .custom-stepper-circle {
+        width: 35px;
+        height: 35px;
+        font-size: 12px;
+    }
+    
+    /* Checkmark más pequeño */
+    .custom-stepper-step.completed .custom-stepper-circle::after {
+        font-size: 16px;
+    }
+    
+    /* Texto aún más pequeño */
+    .custom-stepper-label {
+        margin-top: 6px;
+        font-size: 8px;
+        width: 70px;
+        line-height: 1.1;
+    }
+    
+    /* Botones más pequeños */
+    .stepper-button {
+        padding: 8px 20px;
+        font-size: 12px;
+    }
+    
+    /* Logo más pequeño */
+    .logo-header img {
+        max-width: 180px;
+    }
+    
+    /* Título más pequeño */
+    .page-title {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+}
+
